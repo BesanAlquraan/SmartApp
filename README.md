@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # smart_finance_app
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# SmartApp
+>>>>>>> f061227f3df82d33b77d7c596a5c3c16fc4f66ee
