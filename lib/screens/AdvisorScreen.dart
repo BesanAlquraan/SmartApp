@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+import '../constants/colors.dart';   // ← الاستيراد الصحيح
 
-class AdvisorPage extends StatelessWidget {
+class AdvisorPage extends StatefulWidget {
   const AdvisorPage({super.key});
+
+  @override
+  State<AdvisorPage> createState() => _AdvisorPageState();
+}
+
+class _AdvisorPageState extends State<AdvisorPage> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = VideoPlayerController.asset(
+      'assets/videos/xJ9B487B59DKI59kOb.mp4',
+    )
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.setLooping(true);
+        _controller.play();
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,   // ← الخلفية تم ضبطها هنا
       appBar: AppBar(
         title: const Text('Advisor'),
         centerTitle: true,
@@ -17,15 +47,19 @@ class AdvisorPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // أيقونة أو صورة كبيرة
-              Icon(
-                Icons.person_outline, // ممكن تغيريها لأي أيقونة أخرى
-                size: 150,
-                color: Colors.blueGrey,
-              ),
+              _controller.value.isInitialized
+                  ? SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: VideoPlayer(_controller),
+                      ),
+                    )
+                  : const CircularProgressIndicator(),
+
               const SizedBox(height: 30),
-              
-              // الجملة المناسبة
+
               const Text(
                 "Get advice from AI or connect with a real person!",
                 textAlign: TextAlign.center,
@@ -35,14 +69,12 @@ class AdvisorPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              
-              // الأزرار
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton.icon(
                     onPressed: () {
-                      // افتح صفحة Chat AI
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ChatAIPage()),
@@ -50,15 +82,10 @@ class AdvisorPage extends StatelessWidget {
                     },
                     icon: const Icon(Icons.smart_toy),
                     label: const Text("Chat AI"),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      textStyle: const TextStyle(fontSize: 16),
-                    ),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton.icon(
                     onPressed: () {
-                      // افتح صفحة التواصل مع شخص
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ContactPersonPage()),
@@ -66,10 +93,6 @@ class AdvisorPage extends StatelessWidget {
                     },
                     icon: const Icon(Icons.person),
                     label: const Text("Contact Person"),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      textStyle: const TextStyle(fontSize: 16),
-                    ),
                   ),
                 ],
               ),
@@ -81,7 +104,6 @@ class AdvisorPage extends StatelessWidget {
   }
 }
 
-// صفحات وهمية للتجربة
 class ChatAIPage extends StatelessWidget {
   const ChatAIPage({super.key});
 
