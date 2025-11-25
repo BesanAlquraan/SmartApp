@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart'; // إذا كنت تحتاجي الوصول للـ colors أو غيرها
+import '../main.dart';
+import '../../constants/colors.dart'; // إذا كنت تحتاجي الوصول للـ colors أو غيرها
 
 class ProfileScreen extends StatelessWidget {
   @override

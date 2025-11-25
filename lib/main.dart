@@ -620,8 +620,7 @@ import 'screens/NotificationsScreen.dart';
 import 'screens/SettingsScreen.dart';
 import 'screens/ProfileScreen.dart';
 // ================== COLORS ==================
-const Color primaryColor = Color.fromARGB(255, 176, 191, 211);
-const Color textColor = Color.fromARGB(255, 22, 46, 71);
+import '../../constants/colors.dart';
 
 // ================== MAIN ==================
 void main() {

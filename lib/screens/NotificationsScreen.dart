@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-
+import '../../constants/colors.dart';
 class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

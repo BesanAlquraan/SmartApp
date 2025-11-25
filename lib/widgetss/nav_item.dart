@@ -16,24 +16,28 @@ class _NavItemState extends State<NavItem> {
 
   @override
   Widget build(BuildContext context) {
+    final double fontSize =
+        MediaQuery.of(context).size.width < 600 ? 14 : 18;
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHover = true),
       onExit: (_) => setState(() => _isHover = false),
       child: GestureDetector(
         onTap: widget.onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: _isHover ? Colors.white.withOpacity(0.2) : Colors.transparent,
+            color: _isHover ? primaryColor.withOpacity(0.2) : Colors.transparent,
             borderRadius: BorderRadius.circular(6),
           ),
           child: Text(
             widget.title,
             style: TextStyle(
-              color: const Color.fromARGB(255, 9, 32, 56),
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+              color: _isHover ? primaryColor : textColor,
+              fontSize: fontSize,
+              fontWeight: _isHover ? FontWeight.bold : FontWeight.w500,
             ),
           ),
         ),
